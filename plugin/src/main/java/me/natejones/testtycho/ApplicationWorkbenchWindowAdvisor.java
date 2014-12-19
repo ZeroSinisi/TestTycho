@@ -22,6 +22,6 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setInitialSize(new Point(600, 400));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
-		configurer.setTitle("RCP Application");
+		configurer.setTitle("Test Tycho RCP Application");
 	}
 }

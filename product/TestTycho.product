@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="TestEclipsePlugin01Product"
-  uid="TestEclipsePlugin01Product"
-  id="test-tycho-product"
-  application="test-tycho-plugin.application"
-  useFeatures="false"
-  includeLaunchers="true">
+<product name="TestTycho" uid="TestTychoProduct" id="test-tycho-product" application="test-tycho-plugin.application" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog
-      </programArgs>
       <vmArgs>-Dosgi.requiredJavaVersion=1.7 -Xms40m -Xmx512m
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
    </launcherArgs>
 
-   <launcher>
+   <launcher name="TestTycho">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -31,7 +24,6 @@
    </vm>
 
    <plugins>
-      <plugin id="test-tycho-plugin"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
@@ -100,6 +92,7 @@
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+      <plugin id="test-tycho-plugin"/>
    </plugins>
 
    <configurations>

@@ -4,15 +4,14 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>parent</artifactId>
+    <groupId>me.natejones.testtycho</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../parent/pom.xml</relativePath>
+  </parent>
   <groupId>me.natejones.testtycho</groupId>
-  <artifactId>aggregator</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>parent</module>
-    <module>plugin</module>
-    <module>product</module>
-  </modules>
-
+  <artifactId>test-tycho-plugin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>eclipse-plugin</packaging>
 </project>

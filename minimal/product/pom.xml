@@ -9,7 +9,7 @@
     <artifactId>parent</artifactId>
     <groupId>me.natejones.testtycho</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../parent/pom.xml</relativePath>
+    <relativePath>../../parent/pom.xml</relativePath>
   </parent>
   <groupId>me.natejones.testtycho</groupId>
   <artifactId>test-tycho-product</artifactId>

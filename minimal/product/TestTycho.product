@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.5"?>
 
-<product name="TestTycho" uid="TestTychoProduct" id="test-tycho-product" application="test-tycho-plugin.application" useFeatures="false" includeLaunchers="true">
+<product
+  name="TestTycho"
+  uid="test-tycho-product"
+  id="test-tycho-product"
+  application="test-tycho-plugin.application"
+  useFeatures="false"
+  includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.requiredJavaVersion=1.7 -Xms40m -Xmx512m
-      </vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
-      </vmArgsMac>
+      <vmArgs>-Dosgi.requiredJavaVersion=1.7 -Xms40m -Xmx512m</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread</vmArgsMac>
    </launcherArgs>
 
    <launcher name="TestTycho">
-      <solaris/>
       <win useIco="false">
          <bmp/>
       </win>

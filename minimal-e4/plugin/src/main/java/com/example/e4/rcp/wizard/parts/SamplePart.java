@@ -19,6 +19,9 @@ import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
@@ -44,6 +47,14 @@ public class SamplePart {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				dirty.setDirty(true);
+			}
+		});
+		txtInput.addKeyListener(new KeyAdapter(){
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if(arg0.character == '\r'){
+					save();
+				}
 			}
 		});
 		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

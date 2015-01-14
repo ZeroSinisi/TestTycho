@@ -22,9 +22,15 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="View"
-            class="me.natejones.testtycho.View"
+            name="Calculator"
+            class="me.natejones.testtycho.CalculatorView"
             id="TestEclipsePlugin01.view">
+      </view>
+      <view
+            class="me.natejones.testtycho.HistoryView"
+            id="TestEclipsePlugin02.view"
+            name="History"
+            restorable="true">
       </view>
    </extension>
    <extension
@@ -32,7 +38,7 @@
       <perspectiveExtension
             targetID="*">
          <view
-               standalone="true"
+               standalone="false"
                minimized="false"
                relative="org.eclipse.ui.editorss"
                relationship="left"
@@ -51,6 +57,27 @@
                   label="Exit">
             </command>
          </menu>
+         <menu
+               id="editMenu"
+               label="Edit">
+            <command
+                  commandId="me.natejones.testtycho.commands.Clear"
+                  label="Clear"
+                  tooltip="Clears the number field">
+            </command>
+            <command
+                  commandId="me.natejones.testtycho.commands.NewCalc"
+                  label="Open Calculator"
+                  style="push"
+                  tooltip="Opens the calculator">
+            </command>
+            <command
+                  commandId="me.natejones.testtycho.commands.NewHistory"
+                  label="Open History"
+                  style="push"
+                  tooltip="Opens the calculation history">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
    <extension
@@ -64,6 +91,24 @@
                value="TestEclipsePlugin01Product">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="me.natejones.testtycho.commands.ClearHandler"
+            id="me.natejones.testtycho.commands.Clear"
+            name="Clear">
+      </command>
+      <command
+            defaultHandler="me.natejones.testtycho.commands.NewCalcHandler"
+            id="me.natejones.testtycho.commands.NewCalc"
+            name="NewCalc">
+      </command>
+      <command
+            defaultHandler="me.natejones.testtycho.commands.NewHistoryHandler"
+            id="me.natejones.testtycho.commands.NewHistory"
+            name="NewHistory">
+      </command>
    </extension>
 
 </plugin>

@@ -7,6 +7,12 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+/**
+ * @author Tony Sinisi
+ * 
+ * Handles the NewCalc commands by opening a new CalculatorView.
+ *
+ */
 public class NewCalcHandler implements IHandler {
 
 	@Override

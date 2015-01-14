@@ -10,6 +10,13 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.ViewPart;
 
+/**
+ * @author Tony Sinisi
+ * 
+ * Handles the Clear command by resetting the CalculatorView (which 
+ * also resets the Calculator stacks).
+ *
+ */
 public class ClearHandler implements IHandler {
 
 	@Override

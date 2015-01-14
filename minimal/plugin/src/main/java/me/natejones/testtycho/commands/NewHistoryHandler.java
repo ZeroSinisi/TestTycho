@@ -7,6 +7,12 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+/**
+ * @author Tony Sinisi
+ * 
+ * Handles the NewHistory command by opening a new HistoryView.
+ *
+ */
 public class NewHistoryHandler implements IHandler {
 
 	@Override

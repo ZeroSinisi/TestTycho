@@ -10,7 +10,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 /**
  * @author Tony Sinisi
  * 
- * Handles the NewCalc commands by opening a new CalculatorView.
+ *         Handles the NewCalc commands by opening a new CalculatorView.
  *
  */
 public class NewCalcHandler implements IHandler {
@@ -18,19 +18,18 @@ public class NewCalcHandler implements IHandler {
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().showView("TestEclipsePlugin01.view");
+			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage()
+					.showView("TestEclipsePlugin01.view");
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +49,5 @@ public class NewCalcHandler implements IHandler {
 	@Override
 	public void removeHandlerListener(IHandlerListener handlerListener) {
 		// TODO Auto-generated method stub
-
 	}
-
 }

@@ -13,25 +13,24 @@ import org.eclipse.ui.part.ViewPart;
 /**
  * @author Tony Sinisi
  * 
- * Handles the Clear command by resetting the CalculatorView (which 
- * also resets the Calculator stacks).
+ *         Handles the Clear command by resetting the CalculatorView (which also
+ *         resets the Calculator stacks).
  *
  */
 public class ClearHandler implements IHandler {
 
 	@Override
-	public void addHandlerListener(IHandlerListener handlerListener) {
-
-	}
+	public void addHandlerListener(IHandlerListener handlerListener) {}
 
 	@Override
-	public void dispose() {
-
-	}
+	public void dispose() {}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		((CalculatorView) HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().findViewReference("TestEclipsePlugin01.view", null).getView(false)).clearNumberField();
+		((CalculatorView) HandlerUtil.getActiveWorkbenchWindow(event)
+				.getActivePage()
+				.findViewReference("TestEclipsePlugin01.view", null)
+				.getView(false)).clearNumberField();
 		return null;
 	}
 
@@ -46,8 +45,5 @@ public class ClearHandler implements IHandler {
 	}
 
 	@Override
-	public void removeHandlerListener(IHandlerListener handlerListener) {
-
-	}
-
+	public void removeHandlerListener(IHandlerListener handlerListener) {}
 }

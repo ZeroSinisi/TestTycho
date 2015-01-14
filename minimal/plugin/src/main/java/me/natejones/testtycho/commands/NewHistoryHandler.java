@@ -10,7 +10,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 /**
  * @author Tony Sinisi
  * 
- * Handles the NewHistory command by opening a new HistoryView.
+ *         Handles the NewHistory command by opening a new HistoryView.
  *
  */
 public class NewHistoryHandler implements IHandler {
@@ -18,19 +18,18 @@ public class NewHistoryHandler implements IHandler {
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().showView("TestEclipsePlugin02.view");
+			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage()
+					.showView("TestEclipsePlugin02.view");
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +51,5 @@ public class NewHistoryHandler implements IHandler {
 	@Override
 	public void removeHandlerListener(IHandlerListener handlerListener) {
 		// TODO Auto-generated method stub
-
 	}
-
 }

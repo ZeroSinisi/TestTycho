@@ -11,13 +11,14 @@ import org.eclipse.swt.layout.GridData;
 /**
  * @author Tony Sinisi
  * 
- * A ViewPart for displaying the complete history of Calculator evaluations.
+ *         A ViewPart for displaying the complete history of Calculator
+ *         evaluations.
  *
  */
 public class HistoryView extends ViewPart implements HistoryListener {
 
-	List historyList;
-	
+	List	historyList;
+
 	/**
 	 * Constructor
 	 */
@@ -25,39 +26,42 @@ public class HistoryView extends ViewPart implements HistoryListener {
 		History.listen(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
+	 * .Composite)
 	 */
 	@Override
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		
 		historyList = new List(parent, SWT.BORDER);
-		historyList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-		for(String eq: History.eqs) {
+		historyList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1));
+		for (String eq : History.eqs) {
 			historyList.add(eq);
 		}
-
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
 	@Override
-	public void setFocus() {
+	public void setFocus() {}
 
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see me.natejones.testtycho.HistoryListener#historyUpdate()
 	 */
 	@Override
 	public void historyUpdate() {
 		historyList.removeAll();
-		for(String eq: History.eqs) {
+		for (String eq : History.eqs) {
 			historyList.add(eq);
 		}
 	}
-
 }

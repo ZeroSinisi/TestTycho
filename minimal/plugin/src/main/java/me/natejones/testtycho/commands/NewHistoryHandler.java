@@ -16,20 +16,15 @@ import org.eclipse.ui.handlers.HandlerUtil;
 public class NewHistoryHandler implements IHandler {
 
 	@Override
-	public void addHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
-	}
+	public void addHandlerListener(IHandlerListener handlerListener) {}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-	}
+	public void dispose() {}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage()
-					.showView("TestEclipsePlugin02.view");
+			HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().showView("TestEclipsePlugin02.view");
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -38,18 +33,14 @@ public class NewHistoryHandler implements IHandler {
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isHandled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public void removeHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
-	}
+	public void removeHandlerListener(IHandlerListener handlerListener) {}
 }

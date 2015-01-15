@@ -22,14 +22,21 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="Calculator"
+            allowMultiple="true"
             class="me.natejones.testtycho.CalculatorView"
-            id="TestEclipsePlugin01.view">
+            id="TestEclipsePlugin01.view"
+            name="Calculator">
       </view>
       <view
             class="me.natejones.testtycho.HistoryView"
             id="TestEclipsePlugin02.view"
             name="History"
+            restorable="true">
+      </view>
+      <view
+            class="me.natejones.testtycho.MiscView"
+            id="TestEclipsePlugin03.view"
+            name="Misc"
             restorable="true">
       </view>
    </extension>
@@ -77,6 +84,11 @@
                   style="push"
                   tooltip="Opens the calculation history">
             </command>
+            <command
+                  commandId="me.natejones.testtycho.commands.OpenMisc"
+                  label="Open Misc"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -108,6 +120,11 @@
             defaultHandler="me.natejones.testtycho.commands.NewHistoryHandler"
             id="me.natejones.testtycho.commands.NewHistory"
             name="NewHistory">
+      </command>
+      <command
+            defaultHandler="me.natejones.testtycho.commands.OpenMiscHandler"
+            id="me.natejones.testtycho.commands.OpenMisc"
+            name="OpenMisc">
       </command>
    </extension>
 

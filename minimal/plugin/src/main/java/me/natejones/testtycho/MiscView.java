@@ -1,7 +1,11 @@
 package me.natejones.testtycho;
 
+import java.net.URL;
 import java.util.Random;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -14,12 +18,17 @@ import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -30,6 +39,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class MiscView extends ViewPart {
 
@@ -44,8 +55,28 @@ public class MiscView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		parent.setLayout(new GridLayout(7, false));
-		Tree tree = new Tree(parent, SWT.BORDER);
+		parent.setLayout(new GridLayout(1, false));
+		Composite headerArea = new Composite(parent, SWT.NONE);
+		headerArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		headerArea.setLayout(new GridLayout(1, false));
+		Canvas canvas = new Canvas(headerArea, SWT.NONE);
+		canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		canvas.addPaintListener(new PaintListener() {
+
+			@Override
+			public void paintControl(PaintEvent e) {
+				Bundle bundle = FrameworkUtil.getBundle(this.getClass());
+				URL url = FileLocator.find(bundle, new Path("resources/miscSplash.png"), null);
+				Image splash = ImageDescriptor.createFromURL(url).createImage();
+				GC gc = e.gc;
+				gc.drawImage(splash, 0, 0);
+				splash.dispose();
+			}
+		});
+		Composite bodyArea = new Composite(parent, SWT.NONE);
+		bodyArea.setLayout(new GridLayout(7, false));
+		bodyArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		Tree tree = new Tree(bodyArea, SWT.BORDER);
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		TreeItem trtmA = new TreeItem(tree, SWT.NONE);
 		trtmA.setText("A");
@@ -60,29 +91,15 @@ public class MiscView extends ViewPart {
 		trtmI.setText("I");
 		TreeItem trtmIi = new TreeItem(trtmI, SWT.NONE);
 		trtmIi.setText("II");
-		colorField = new Label(parent, SWT.NONE);
+		colorField = new Label(bodyArea, SWT.NONE);
+		colorField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		colorField.setText("                        ");
 		colorField.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		colorField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		colorField.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseUp(MouseEvent e) {}
-
-			@Override
-			public void mouseDown(MouseEvent e) {
-				int[] rgb = randomColor();
-				colorField.setBackground(new Color(display, rgb[0], rgb[1], rgb[2]));
-			}
-
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {}
-		});
-		Composite buttons = new Composite(parent, SWT.NONE);
+		Composite buttons = new Composite(bodyArea, SWT.NONE);
+		buttons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		buttons.setLayout(new GridLayout(1, false));
-		buttons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		Button btnStartJob = new Button(buttons, SWT.NONE);
-		btnStartJob.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true, 1, 1));
+		btnStartJob.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
 		btnStartJob.setText("Start Job");
 		final Button btnCycleColors = new Button(buttons, SWT.TOGGLE | SWT.CENTER);
 		btnCycleColors.addSelectionListener(new SelectionListener() {
@@ -129,16 +146,18 @@ public class MiscView extends ViewPart {
 		});
 		btnCycleColors.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true, 1, 1));
 		btnCycleColors.setText("Cycle Colors");
-		btnStartJob.addSelectionListener(new JobSelectionAdapter(getSite().getShell()));
-		Composite dragColors = new Composite(parent, SWT.NONE);
-		dragColors.setLayout(new GridLayout(1, false));
+		Composite dragColors = new Composite(bodyArea, SWT.NONE);
 		dragColors.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		dragColors.setLayout(new GridLayout(1, false));
 		final Label lblRed = new Label(dragColors, SWT.NONE);
+		lblRed.setAlignment(SWT.CENTER);
 		lblRed.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblRed.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		lblRed.setText("Red");
-		DragSource dragSourceRed = new DragSource(lblRed, DND.DROP_MOVE | DND.DROP_COPY);
 		Transfer[] types = new Transfer[] { TextTransfer.getInstance() };
+		final TextTransfer textTransfer = TextTransfer.getInstance();
+		types = new TextTransfer[] { textTransfer };
+		DragSource dragSourceRed = new DragSource(lblRed, DND.DROP_MOVE | DND.DROP_COPY);
 		dragSourceRed.setTransfer(types);
 		dragSourceRed.addDragListener(new DragSourceListener() {
 
@@ -153,11 +172,10 @@ public class MiscView extends ViewPart {
 			}
 
 			@Override
-			public void dragFinished(DragSourceEvent event) {
-				// TODO Auto-generated method stub
-			}
+			public void dragFinished(DragSourceEvent event) {}
 		});
 		final Label lblBlue = new Label(dragColors, SWT.NONE);
+		lblBlue.setAlignment(SWT.CENTER);
 		lblBlue.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
 		lblBlue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		lblBlue.setText("Blue");
@@ -179,37 +197,21 @@ public class MiscView extends ViewPart {
 			public void dragFinished(DragSourceEvent event) {}
 		});
 		final Label lblGreen = new Label(dragColors, SWT.NONE);
+		lblGreen.setAlignment(SWT.CENTER);
 		lblGreen.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		lblGreen.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		lblGreen.setText("Green");
 		DragSource dragSourceGreen = new DragSource(lblGreen, DND.DROP_MOVE);
 		dragSourceGreen.setTransfer(types);
-		dragSourceGreen.addDragListener(new DragSourceListener() {
-
-			@Override
-			public void dragStart(DragSourceEvent event) {}
-
-			@Override
-			public void dragSetData(DragSourceEvent event) {
-				if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
-					event.data = lblGreen.getText();
-				}
-			}
-
-			@Override
-			public void dragFinished(DragSourceEvent event) {}
-		});
-		colorTable = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
+		colorTable = new Table(bodyArea, SWT.BORDER | SWT.FULL_SELECTION);
 		colorTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		colorTable.setHeaderVisible(true);
 		colorTable.setLinesVisible(true);
 		DropTarget dropTargetColorTable = new DropTarget(colorTable, DND.DROP_MOVE);
-		final TextTransfer textTransfer = TextTransfer.getInstance();
-		types = new TextTransfer[] { textTransfer };
 		dropTargetColorTable.setTransfer(types);
-		Composite radios = new Composite(parent, SWT.NONE);
+		Composite radios = new Composite(bodyArea, SWT.NONE);
+		radios.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		radios.setLayout(new GridLayout(1, false));
-		radios.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		final Button progressRadio100 = new Button(radios, SWT.RADIO);
 		progressRadio100.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		progressRadio100.setText("100%");
@@ -240,7 +242,10 @@ public class MiscView extends ViewPart {
 		progressRadio20.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		progressRadio20.setText("20%");
 		Button btnCycleProgress = new Button(radios, SWT.NONE);
+		btnCycleProgress.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
 		btnCycleProgress.setText("Cycle Progress");
+		progressBar = new ProgressBar(bodyArea, SWT.VERTICAL);
+		progressBar.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true, 1, 1));
 		btnCycleProgress.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -283,8 +288,6 @@ public class MiscView extends ViewPart {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
-		progressBar = new ProgressBar(parent, SWT.VERTICAL);
-		progressBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		dropTargetColorTable.addDropListener(new DropTargetListener() {
 
 			@Override
@@ -321,6 +324,36 @@ public class MiscView extends ViewPart {
 
 			@Override
 			public void dragEnter(DropTargetEvent event) {}
+		});
+		dragSourceGreen.addDragListener(new DragSourceListener() {
+
+			@Override
+			public void dragStart(DragSourceEvent event) {}
+
+			@Override
+			public void dragSetData(DragSourceEvent event) {
+				if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
+					event.data = lblGreen.getText();
+				}
+			}
+
+			@Override
+			public void dragFinished(DragSourceEvent event) {}
+		});
+		btnStartJob.addSelectionListener(new JobSelectionAdapter(getSite().getShell()));
+		colorField.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseUp(MouseEvent e) {}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+				int[] rgb = randomColor();
+				colorField.setBackground(new Color(display, rgb[0], rgb[1], rgb[2]));
+			}
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {}
 		});
 	}
 

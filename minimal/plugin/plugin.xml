@@ -49,7 +49,7 @@
                minimized="false"
                relative="org.eclipse.ui.editorss"
                relationship="left"
-               id="TestEclipsePlugin01.view">
+               id="TestEclipsePlugin03.view">
          </view>
       </perspectiveExtension>
    </extension>

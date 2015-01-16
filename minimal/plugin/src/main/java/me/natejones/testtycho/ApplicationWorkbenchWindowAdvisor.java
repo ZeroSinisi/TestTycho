@@ -18,9 +18,10 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	public void preWindowOpen() {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
-		configurer.setInitialSize(new Point(400, 530));
+		configurer.setInitialSize(new Point(800, 530));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
 		configurer.setTitle("Test Tycho RCP Application");
+		configurer.setShowProgressIndicator(true);
 	}
 }

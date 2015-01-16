@@ -83,49 +83,42 @@ public class MiscView extends ViewPart {
 		btnStartJob.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true, 1, 1));
 		btnStartJob.setText("Start Job");
 		Button btnCycleColors = new Button(buttons, SWT.TOGGLE | SWT.CENTER);
-		final Thread task = new Thread() {
-
-			private boolean	alive	= true;
-
-			@Override
-			public void run() {
-				while (alive) {
-					final int[] rgb = randomColor();
-					display.asyncExec(new Runnable() {
-
-						@Override
-						public void run() {
-							colorField.setBackground(new Color(display, rgb[0], rgb[1], rgb[2]));
-						}
-					});
-					try {
-						sleep(500);
-					} catch (InterruptedException e) {
-						try {
-							sleep(0);
-							// TODO This doesn't work because the first sleep
-							// has already locked the monitor for this thread,
-							// so it cannot be locked again.
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-					}
-				}
-			}
-		};
 		btnCycleColors.addSelectionListener(new SelectionListener() {
+
+			Thread	task;
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Button tglBtn = (Button) e.getSource();
 				if (tglBtn.getSelection()) {
-					if (!task.isAlive()) {
-						task.start();
-					} else {
-						task.notify();
-					}
+					task = new Thread() {
+
+						private boolean	working	= true;
+
+						@Override
+						public void run() {
+							while (working) {
+								final int[] rgb = randomColor();
+								display.asyncExec(new Runnable() {
+
+									@Override
+									public void run() {
+										colorField.setBackground(new Color(display, rgb[0], rgb[1], rgb[2]));
+									}
+								});
+								try {
+									sleep(500);
+								} catch (InterruptedException e) {
+									working = false;
+								}
+							}
+						}
+					};
+					task.start();
 				} else {
-					task.interrupt();
+					while (task.isAlive()) {
+						task.interrupt();
+					}
 				}
 			}
 

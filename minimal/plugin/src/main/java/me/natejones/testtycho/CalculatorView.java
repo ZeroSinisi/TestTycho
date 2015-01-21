@@ -104,6 +104,10 @@ public class CalculatorView extends ViewPart {
 		btnOne.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnOne.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnOne.setText("1");
+		/**
+		 * This is an example of an anonymous Selection Adapter for handling an
+		 * event on the One Button.
+		 */
 		btnOne.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -116,136 +120,76 @@ public class CalculatorView extends ViewPart {
 		btnTwo.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnTwo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnTwo.setText("2");
-		btnTwo.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("2");
-				numberField.append("2");
-			}
-		});
+		/**
+		 * For the rest of the buttons, the CalcBtnAdapter implementation is
+		 * used. This helps reduce the amount of repeated code with in this
+		 * class by not having to redefine an anonymous adapter for every
+		 * button.
+		 */
+		btnTwo.setData("2");
+		btnTwo.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnThree = new Button(buttonField, SWT.NONE);
 		btnThree.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnThree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnThree.setText("3");
-		btnThree.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("3");
-				numberField.append("3");
-			}
-		});
+		btnThree.setData("3");
+		btnThree.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnFour = new Button(buttonField, SWT.NONE);
 		btnFour.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnFour.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnFour.setText("4");
-		btnFour.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("4");
-				numberField.append("4");
-			}
-		});
+		btnFour.setData("4");
+		btnFour.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnFive = new Button(buttonField, SWT.NONE);
 		btnFive.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnFive.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnFive.setText("5");
-		btnFive.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("5");
-				numberField.append("5");
-			}
-		});
+		btnFive.setData("5");
+		btnFive.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnSix = new Button(buttonField, SWT.NONE);
 		btnSix.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnSix.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnSix.setText("6");
-		btnSix.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("6");
-				numberField.append("6");
-			}
-		});
+		btnSix.setData("6");
+		btnSix.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnSeven = new Button(buttonField, SWT.NONE);
 		btnSeven.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnSeven.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnSeven.setText("7");
-		btnSeven.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("7");
-				numberField.append("7");
-			}
-		});
+		btnSeven.setData("7");
+		btnSeven.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnEight = new Button(buttonField, SWT.NONE);
 		btnEight.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnEight.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnEight.setText("8");
-		btnEight.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("8");
-				numberField.append("8");
-			}
-		});
+		btnEight.setData("8");
+		btnEight.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnNine = new Button(buttonField, SWT.NONE);
 		btnNine.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnNine.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnNine.setText("9");
-		btnNine.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("9");
-				numberField.append("9");
-			}
-		});
+		btnNine.setData("9");
+		btnNine.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		btnAdd = new Button(buttonField, SWT.NONE);
 		btnAdd.setEnabled(false);
 		btnAdd.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnAdd.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnAdd.setText("+");
-		btnAdd.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				numberField.append("+");
-				calc.addition();
-			}
-		});
+		btnAdd.setData("+");
+		btnAdd.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		btnSub = new Button(buttonField, SWT.NONE);
 		btnSub.setEnabled(false);
 		btnSub.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnSub.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnSub.setText("-");
-		btnSub.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				numberField.append("-");
-				calc.subtraction();
-			}
-		});
+		btnSub.setData("-");
+		btnSub.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnZero = new Button(buttonField, SWT.NONE);
-		btnZero.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				calc.pushToCurrent("0");
-				numberField.append("0");
-			}
-		});
 		btnZero.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnZero.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		btnZero.setText("0");
+		btnZero.setData("0");
+		btnZero.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		/**
 		 * Sets up the bottom bar; an area for addition calculation features.
 		 * The evaluate operator and a checkbox toggle are added to the bottom
@@ -259,14 +203,8 @@ public class CalculatorView extends ViewPart {
 		btnEqs.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		btnEqs.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		btnEqs.setText("=");
-		btnEqs.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				int total = calc.evaluate();
-				numberField.setText(String.valueOf(total));
-			}
-		});
+		btnEqs.setData("=");
+		btnEqs.addSelectionListener(new CalcBtnAdapter(calc, numberField));
 		final Button btnBinaryToggle = new Button(bottomBar, SWT.CHECK);
 		btnBinaryToggle.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
 		btnBinaryToggle.setText("Base 2");

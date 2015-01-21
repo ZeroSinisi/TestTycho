@@ -5,6 +5,7 @@ Bundle-SymbolicName: test-tycho-plugin;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: me.natejones.testtycho.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.e4.ui.css.swt.theme;bundle-version="0.9.300"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

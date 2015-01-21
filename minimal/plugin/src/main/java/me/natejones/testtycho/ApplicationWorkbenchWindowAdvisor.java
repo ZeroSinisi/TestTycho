@@ -23,5 +23,20 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setShowStatusLine(false);
 		configurer.setTitle("Test Tycho RCP Application");
 		configurer.setShowProgressIndicator(true);
+		/**
+		 * This is to get Themes to work, but currently breaks everything.
+		 * 
+		 * BundleContext context =
+		 * Platform.getBundle(Activator.PLUGIN_ID).getBundleContext();
+		 * ServiceReference ref =
+		 * context.getServiceReference(IThemeManager.class.getName());
+		 * IThemeManager manager = (IThemeManager) context.getService(ref);
+		 * IThemeEngine engine = manager
+		 * .getEngineForDisplay(PlatformUI.getWorkbench
+		 * ().getActiveWorkbenchWindow() == null ? Display .getCurrent() :
+		 * PlatformUI
+		 * .getWorkbench().getActiveWorkbenchWindow().getShell().getDisplay());
+		 * engine.setTheme("me.natejones.testtyco.themes.zero", true);
+		 */
 	}
 }

@@ -12,6 +12,17 @@
       </application>
    </extension>
    <extension
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="testPlugin.product"
+            name="Test Plugin">
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/resources/zerotheme.css">
+         </property>
+      </product>
+   </extension>
+   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             name="Perspective"
@@ -126,6 +137,21 @@
             id="me.natejones.testtycho.commands.OpenMisc"
             name="OpenMisc">
       </command>
+   </extension>
+   <extension
+         id="me.natejones.testtyco.themes"
+         name="Themes"
+         point="org.eclipse.e4.ui.css.swt.theme">
+      <theme
+            basestylesheeturi="resources/zerotheme.css"
+            id="me.natejones.testtyco.themes.zero"
+            label="Zero Theme">
+      </theme>
+      <theme
+            basestylesheeturi="resources/defaulttheme.css"
+            id="me.natejones.testtyco.themes.default"
+            label="Default Theme">
+      </theme>
    </extension>
 
 </plugin>
